@@ -35,7 +35,8 @@ allprojects {
                 retrofitLibraryVersion: "2.0.2",
                 picassoLibraryVersion : "2.5.2",
                 daggerVersion         : "1.2.2",
-                okHttpVersion         : "3.2.0"
+                okHttpVersion         : "3.2.0",
+                rxAndroidVersion      : "0.24.0"
         ]
     }
 

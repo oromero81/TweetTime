@@ -17,10 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-        if (getModules() != null) {
-            activityGraph = ((TweetTimeApp) getApplication()).createScopedGraph(getModules().toArray());
-            activityGraph.inject(this);
-        }
+
     }
 
     @Override

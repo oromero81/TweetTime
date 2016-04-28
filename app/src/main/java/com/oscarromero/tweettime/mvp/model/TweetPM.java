@@ -1,6 +1,6 @@
 package com.oscarromero.tweettime.mvp.model;
 
-import com.oscarromero.entities.Tweet;
+import com.oscarromero.domain.entities.Tweet;
 
 /**
  * Created by Oscar on 28/4/16.
