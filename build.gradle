@@ -16,6 +16,29 @@ allprojects {
     repositories {
         jcenter()
     }
+    ext {
+        configuration = [
+                compileSdkVersion: 23,
+                buildToolsVersion: "23.0.3",
+                applicationId    : "com.oscarromero.tweettime",
+                minSdkVersion    : 16,
+                targetSdkVersion : 23,
+                versionCode      : 1,
+                versionName      : "1.0"
+        ]
+        // Android config
+
+        //Dependencies versions
+        libraries = [
+                butterKnifeVersion    : "8.0.1",
+                supportLibraryVersion : "23.3.0",
+                retrofitLibraryVersion: "2.0.2",
+                picassoLibraryVersion : "2.5.2",
+                daggerVersion         : "1.2.2",
+                okHttpVersion         : "3.2.0"
+        ]
+    }
+
 }
 
 task clean(type: Delete) {

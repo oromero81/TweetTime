@@ -1,15 +1,13 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
-def cfg = rootProject.ext.configuration;
+def cfg = rootProject.ext.configuration
 def libs = rootProject.ext.libraries;
-
 
 android {
     compileSdkVersion cfg.compileSdkVersion
     buildToolsVersion cfg.buildToolsVersion
 
     defaultConfig {
-        applicationId cfg.applicationId
         minSdkVersion cfg.minSdkVersion
         targetSdkVersion cfg.targetSdkVersion
         versionCode cfg.versionCode
@@ -26,13 +24,11 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${libs.supportLibraryVersion}"
-    compile "com.android.support:design:${libs.supportLibraryVersion}"
-    compile "com.jakewharton:butterknife:${libs.butterKnifeVersion}"
-    compile "com.squareup.picasso:picasso:${libs.picassoLibraryVersion}"
-    compile "com.squareup.dagger:dagger:${libs.daggerVersion}"
-    provided "com.squareup.dagger:dagger-compiler:${libs.daggerVersion}"
+
+    compile "com.squareup.retrofit2:retrofit:${libs.retrofitLibraryVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${libs.retrofitLibraryVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${libs.okHttpVersion}"
+    compile "com.squareup.okhttp3:okhttp:${libs.okHttpVersion}"
 
     compile project(":domain")
-    compile project(":data")
 }
