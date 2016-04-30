@@ -1,12 +1,12 @@
 package com.oscarromero.data.datasource;
 
 import android.util.Base64;
-import android.util.Log;
 
 import com.oscarromero.data.api.TwitterApi;
-import com.oscarromero.data.dto.StatusDTO;
 import com.oscarromero.data.dto.TwitterResponseDTO;
 import com.oscarromero.data.dto.TwitterTokenDTO;
+import com.oscarromero.data.mapper.ListMapper;
+import com.oscarromero.data.mapper.StatusDTOMapper;
 import com.oscarromero.domain.entities.Tweet;
 
 import java.io.UnsupportedEncodingException;
@@ -39,7 +39,6 @@ public class TwitterNDS implements NetworkDataSource<List<Tweet>> {
         token.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<TwitterTokenDTO>() {
             @Override
             public void call(TwitterTokenDTO twitterTokenDTO) {
-                Log.i("TOKEN", twitterTokenDTO.getAccessToken() + " " + twitterTokenDTO.getTokenType());
                 doSearch(twitterTokenDTO.getAccessToken());
             }
         });
@@ -51,9 +50,7 @@ public class TwitterNDS implements NetworkDataSource<List<Tweet>> {
         tweets.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<TwitterResponseDTO>() {
             @Override
             public void call(TwitterResponseDTO twitterResponseDTO) {
-                for (StatusDTO statusDTO : twitterResponseDTO.getStatuses()) {
-                    Log.i("TW", statusDTO.getText() + "\n" + statusDTO.getCreatedAt());
-                }
+                List<Tweet> tweets = new ListMapper<>(new StatusDTOMapper()).transform(twitterResponseDTO.getStatuses());
             }
         });
     }
