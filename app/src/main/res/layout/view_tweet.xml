@@ -11,6 +11,8 @@
             android:id="@+id/user_iv"
             android:layout_width="@dimen/tweet_view_image_size"
             android:layout_height="@dimen/tweet_view_image_size"
+            android:layout_marginRight="@dimen/margin_padding_S"
+            android:layout_marginTop="@dimen/margin_padding_S"
             tools:src="@mipmap/ic_launcher" />
 
         <LinearLayout
@@ -51,6 +53,5 @@
         android:id="@+id/message_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="it's 10:42 and my children just born"
-        android:layout_marginTop="@dimen/margin_padding_S"/>
+        tools:text="it's 10:42 and my children just born" />
 </merge>

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
 
 def cfg = rootProject.ext.configuration;
 def libs = rootProject.ext.libraries;
@@ -33,6 +35,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${libs.supportLibraryVersion}"
     compile "com.android.support:design:${libs.supportLibraryVersion}"
     compile "com.jakewharton:butterknife:${libs.butterKnifeVersion}"
+    apt "com.jakewharton:butterknife-compiler:${libs.butterKnifeVersion}"
     compile "com.squareup.picasso:picasso:${libs.picassoLibraryVersion}"
     compile "com.squareup.dagger:dagger:${libs.daggerVersion}"
     provided "com.squareup.dagger:dagger-compiler:${libs.daggerVersion}"

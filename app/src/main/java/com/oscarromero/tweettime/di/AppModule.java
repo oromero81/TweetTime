@@ -2,6 +2,8 @@ package com.oscarromero.tweettime.di;
 
 import android.content.Context;
 
+import com.oscarromero.tweettime.ImageNetworkLoader;
+import com.oscarromero.tweettime.PicassoImageNetworkLoader;
 import com.oscarromero.tweettime.TweetTimeApp;
 
 import dagger.Module;
@@ -27,5 +29,10 @@ public class AppModule {
     @Provides
     public Context provideContext() {
         return tweetTimeApp.getApplicationContext();
+    }
+
+    @Provides
+    public ImageNetworkLoader provideImageNetworkLoader(Context context) {
+        return new PicassoImageNetworkLoader(context);
     }
 }

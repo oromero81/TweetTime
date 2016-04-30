@@ -5,6 +5,7 @@
     android:layout_margin="@dimen/margin_padding_M">
 
    <com.oscarromero.tweettime.customview.TweetView
+       android:id="@+id/tweet_view"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_centerInParent="true"/>
