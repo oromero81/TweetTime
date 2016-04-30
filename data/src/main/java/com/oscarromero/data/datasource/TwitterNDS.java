@@ -11,11 +11,13 @@ import com.oscarromero.domain.entities.Tweet;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -35,24 +37,22 @@ public class TwitterNDS implements NetworkDataSource<List<Tweet>> {
 
     @Override
     public Observable<List<Tweet>> callToServer() {
-        Observable<TwitterTokenDTO> token = twitterApi.getToken(TOKEN_AUTHORIZATION + encodeKeys(API_KEY, API_SECRET), "client_credentials");
-        token.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<TwitterTokenDTO>() {
-            @Override
-            public void call(TwitterTokenDTO twitterTokenDTO) {
-                doSearch(twitterTokenDTO.getAccessToken());
-            }
-        });
-        return null;
-    }
-
-    private void doSearch(String token) {
-        Observable<TwitterResponseDTO> tweets = twitterApi.doSearch(FEED_AUTHORIZATION + token, encodeSearch());
-        tweets.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<TwitterResponseDTO>() {
-            @Override
-            public void call(TwitterResponseDTO twitterResponseDTO) {
-                List<Tweet> tweets = new ListMapper<>(new StatusDTOMapper()).transform(twitterResponseDTO.getStatuses());
-            }
-        });
+        return twitterApi
+                .getToken(TOKEN_AUTHORIZATION + encodeKeys(API_KEY, API_SECRET), "client_credentials")
+                .subscribeOn(Schedulers.newThread())
+                .switchMap(new Func1<TwitterTokenDTO, Observable<? extends TwitterResponseDTO>>() {
+                    @Override
+                    public Observable<? extends TwitterResponseDTO> call(TwitterTokenDTO twitterTokenDTO) {
+                        return twitterApi.doSearch(FEED_AUTHORIZATION + twitterTokenDTO.getAccessToken(), encodeSearch());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<TwitterResponseDTO, List<Tweet>>() {
+                    @Override
+                    public List<Tweet> call(TwitterResponseDTO twitterResponseDTO) {
+                        return new ListMapper<>(new StatusDTOMapper()).transform(twitterResponseDTO.getStatuses());
+                    }
+                });
     }
 
     private String encodeKeys(String consumerKey, String consumerSecret) {
@@ -72,7 +72,11 @@ public class TwitterNDS implements NetworkDataSource<List<Tweet>> {
 
     private String encodeSearch() {
         try {
-            return URLEncoder.encode("\"It's 1:21 and \"", "UTF-8");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("h:mm");
+            String time = simpleDateFormat.format(new Date());
+            String search = "\"It's " + time + " and \"";
+
+            return URLEncoder.encode(search, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
