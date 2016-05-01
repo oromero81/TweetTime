@@ -7,4 +7,6 @@ import com.oscarromero.tweettime.mvp.model.TweetPM;
  */
 public interface MainPresenterView extends BasePresenterView {
     void showTweet(TweetPM tweetPM);
+
+    void hideTweet();
 }

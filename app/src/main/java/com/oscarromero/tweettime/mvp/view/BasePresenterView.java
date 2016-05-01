@@ -7,4 +7,8 @@ public interface BasePresenterView {
     void showLoading();
 
     void hideLoading();
+
+    void showEmptyView();
+
+    void hideEmptyView();
 }

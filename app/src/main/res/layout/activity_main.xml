@@ -5,6 +5,7 @@
     android:layout_margin="@dimen/margin_padding_M">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/tweet_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
@@ -14,6 +15,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/retry_message" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/loading_view"
@@ -27,7 +41,7 @@
         <ProgressBar
             android:layout_width="@dimen/loading_size"
             android:layout_height="@dimen/loading_size"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"

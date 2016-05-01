@@ -89,11 +89,15 @@ public class MainPresenterImpl implements MainPresenter {
 
     private void showTweet() {
         if (!tweets.isEmpty()) {
+            presenterView.hideEmptyView();
             presenterView.showTweet(new TweetPM(tweets.get(tweetCounter)));
             tweetCounter++;
             if (tweetCounter >= tweets.size()) {
                 tweetCounter = 0;
             }
+        } else {
+            presenterView.hideTweet();
+            presenterView.showEmptyView();
         }
     }
 }
