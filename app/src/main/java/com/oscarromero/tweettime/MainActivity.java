@@ -47,6 +47,12 @@ public class MainActivity extends BaseActivity implements MainPresenterView {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        mainPresenter.onStop();
+    }
+
+    @Override
     protected List<Object> getModules() {
         return Arrays.<Object>asList(new MainModule(this));
     }

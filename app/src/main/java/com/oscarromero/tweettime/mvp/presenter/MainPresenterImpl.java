@@ -26,6 +26,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     private List<Tweet> tweets;
     private int tweetCounter = 0;
+    private CountDownTimer countDownTimer;
 
     public MainPresenterImpl(MainPresenterView presenterView, Interactor<List<Tweet>> getTweetsInteractor) {
         this.presenterView = presenterView;
@@ -78,11 +79,11 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void onStop() {
         twitterSubscription.unsubscribe();
+        countDownTimer.cancel();
     }
 
     private void updateTweets(int seconds) {
-
-        new CountDownTimer(seconds * 1000, 6000) {
+        countDownTimer = new CountDownTimer(seconds * 1000, 6000) {
             public void onTick(long millisUntilFinished) {
                 showTweet();
             }
@@ -92,7 +93,8 @@ public class MainPresenterImpl implements MainPresenter {
                 getTweet();
                 cancel();
             }
-        }.start();
+        };
+        countDownTimer.start();
     }
 
     private void showTweet() {
