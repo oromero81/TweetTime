@@ -17,6 +17,6 @@ public class PicassoImageNetworkLoader implements ImageNetworkLoader {
 
     @Override
     public void loadImage(String url, ImageView imageView) {
-        Picasso.with(context).load(url).into(imageView);
+        Picasso.with(context).load(url).placeholder(R.drawable.image_placeholder).into(imageView);
     }
 }
