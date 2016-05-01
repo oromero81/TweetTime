@@ -35,31 +35,39 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public void getTweet() {
         presenterView.showLoading();
-        twitterSubscription = getTweetsInteractor.run().subscribe(new Action1<List<Tweet>>() {
-            @Override
-            public void call(List<Tweet> tweets) {
-                MainPresenterImpl.this.tweets = tweets;
-                Collections.sort(MainPresenterImpl.this.tweets, new Comparator<Tweet>() {
+        twitterSubscription = getTweetsInteractor.run()
+                .subscribe(new Action1<List<Tweet>>() {
                     @Override
-                    public int compare(Tweet tweet, Tweet t1) {
-                        int retweets = tweet.getRetweets();
-                        int retweets1 = t1.getRetweets();
-                        int sComp = retweets1 - retweets;
+                    public void call(List<Tweet> tweets) {
+                        MainPresenterImpl.this.tweets = tweets;
+                        Collections.sort(MainPresenterImpl.this.tweets, new Comparator<Tweet>() {
+                            @Override
+                            public int compare(Tweet tweet, Tweet t1) {
+                                int retweets = tweet.getRetweets();
+                                int retweets1 = t1.getRetweets();
+                                int sComp = retweets1 - retweets;
 
-                        if (sComp != 0) {
-                            return sComp;
-                        } else {
-                            Date date = tweet.getCreateAt();
-                            Date date1 = t1.getCreateAt();
-                            return date1.compareTo(date);
-                        }
+                                if (sComp != 0) {
+                                    return sComp;
+                                } else {
+                                    Date date = tweet.getCreateAt();
+                                    Date date1 = t1.getCreateAt();
+                                    return date1.compareTo(date);
+                                }
+                            }
+                        });
+                        int second = Calendar.getInstance().get(Calendar.SECOND);
+                        updateTweets(60 - second);
+                        presenterView.hideLoading();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        presenterView.hideLoading();
+                        presenterView.hideTweet();
+                        presenterView.showEmptyView();
                     }
                 });
-                int second = Calendar.getInstance().get(Calendar.SECOND);
-                updateTweets(60 - second);
-                presenterView.hideLoading();
-            }
-        });
     }
 
     @Override
