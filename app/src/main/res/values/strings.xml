@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tweet Time</string>
+
+    <string name="username">(@%s)</string>
+    <string name="retweets">%s retweets</string>
+    <string name="loading_new_tweets">Loading new Tweets</string>
+    <string name="retry_message">Sorry, but we haven\'t found tweets :( \nIn 1 minute, automatically, we\'ll try another time.</string>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="tweet_view_image_size">60dp</dimen>
+    <dimen name="margin_padding_S">4dp</dimen>
+    <dimen name="margin_padding_M">8dp</dimen>
+    <dimen name="margin_padding_XS">2dp</dimen>
+    <dimen name="textsize_S">12sp</dimen>
+    <dimen name="textsize_M">16sp</dimen>
+    <dimen name="loading_size">15dp</dimen>
+</resources>
