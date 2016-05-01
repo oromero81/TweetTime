@@ -34,6 +34,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     @Override
     public void getTweet() {
+        presenterView.showLoading();
         twitterSubscription = getTweetsInteractor.run().subscribe(new Action1<List<Tweet>>() {
             @Override
             public void call(List<Tweet> tweets) {
@@ -56,6 +57,7 @@ public class MainPresenterImpl implements MainPresenter {
                 });
                 int second = Calendar.getInstance().get(Calendar.SECOND);
                 updateTweets(60 - second);
+                presenterView.hideLoading();
             }
         });
     }

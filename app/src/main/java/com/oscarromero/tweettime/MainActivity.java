@@ -1,6 +1,7 @@
 package com.oscarromero.tweettime;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.oscarromero.tweettime.customview.TweetView;
 import com.oscarromero.tweettime.di.MainModule;
@@ -19,6 +20,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity implements MainPresenterView {
     @BindView(R.id.tweet_view)
     TweetView tweetView;
+    @BindView(R.id.loading_view)
+    View loading_view;
 
     @Inject
     MainPresenter mainPresenter;
@@ -49,12 +52,12 @@ public class MainActivity extends BaseActivity implements MainPresenterView {
     }
 
     @Override
-    public void showLoading(int messageResource) {
-
+    public void showLoading() {
+        loading_view.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        loading_view.setVisibility(View.GONE);
     }
 }

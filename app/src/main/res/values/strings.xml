@@ -3,4 +3,5 @@
 
     <string name="username">(@%s)</string>
     <string name="retweets">%s retweets</string>
+    <string name="loading_new_tweets">Loading new Tweets</string>
 </resources>
