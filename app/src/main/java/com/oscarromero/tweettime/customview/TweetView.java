@@ -31,6 +31,8 @@ public class TweetView extends LinearLayout {
     TextView date_tv;
     @BindView(R.id.message_tv)
     TextView message_tv;
+    @BindView(R.id.retweets_tv)
+    TextView retweets_tv;
 
 
     public TweetView(Context context) {
@@ -64,9 +66,10 @@ public class TweetView extends LinearLayout {
 
     public void render(TweetPM tweetPM, ImageNetworkLoader imageNetworkLoader) {
         name_tv.setText(tweetPM.getName());
-        username_tv.setText(tweetPM.getUsername());
+        username_tv.setText(String.format(getContext().getString(R.string.username), tweetPM.getUsername()));
         message_tv.setText(tweetPM.getMessage());
         date_tv.setText(tweetPM.getDate());
+        retweets_tv.setText(String.format(getContext().getString(R.string.retweets), tweetPM.getRetweets()));
         imageNetworkLoader.loadImage(tweetPM.getImage(), user_iv);
     }
 }

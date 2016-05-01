@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Tweet Time</string>
+
+    <string name="username">(@%s)</string>
+    <string name="retweets">%s retweets</string>
 </resources>

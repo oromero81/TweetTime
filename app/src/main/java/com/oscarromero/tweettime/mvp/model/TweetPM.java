@@ -19,7 +19,7 @@ public class TweetPM {
     }
 
     public String getUsername() {
-        return "(@" + tweet.getUser().getUsername() + ")";
+        return tweet.getUser().getUsername();
     }
 
     public String getMessage() {
@@ -33,5 +33,9 @@ public class TweetPM {
 
     public String getImage() {
         return tweet.getUser().getProfileImageUrl();
+    }
+
+    public int getRetweets() {
+        return tweet.getRetweets();
     }
 }
